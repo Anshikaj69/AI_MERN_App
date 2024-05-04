@@ -12,7 +12,11 @@ export function getRandomPrompt(prompt){
 
 export async function downloadImage(_id, url) {
     try {
-        const response = await fetch(url);
+        console.log(url)
+        const sliced = url.slice(4);
+        const newUrl= 'https'+sliced
+        console.log(newUrl)
+        const response = await fetch(newUrl);
         const blob = await response.blob();
         const filename = `download-${_id}.jpg`;
         if (window.navigator.msSaveOrOpenBlob) {

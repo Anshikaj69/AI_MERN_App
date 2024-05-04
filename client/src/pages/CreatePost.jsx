@@ -86,6 +86,7 @@ const CreatePost = () => {
                     
                     // Set the Base64 data as the photo property of the form
                     setForm({ ...form, photo: base64data });
+                    
                 };
             } catch (error) {
                 console.error(error);
