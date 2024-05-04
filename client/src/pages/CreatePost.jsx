@@ -12,6 +12,7 @@ const CreatePost = () => {
         name: '',
         prompt: '',
         photo: '',
+        blob:''
     })
 
     const [generatingImg, setGeneratingImg] = useState(false)
@@ -75,11 +76,11 @@ const CreatePost = () => {
                     throw new Error('Failed to fetch image');
                 }
     
-                const blob = await response.blob();
+                const blob1 = await response.blob();
     
                 // Convert Blob to Base64
                 const reader = new FileReader();
-                reader.readAsDataURL(blob);
+                reader.readAsDataURL(blob1);
                 reader.onloadend = () => {
                     const base64data = reader.result;
                     

@@ -10,6 +10,26 @@ export function getRandomPrompt(prompt){
     return randomPrompt
 }
 
-export function downloadImage(_id, photo){
-    FileSaver.saveAs(photo, `download-${_id}.jpg`)
-} 
+export async function downloadImage(_id, url) {
+    try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const filename = `download-${_id}.jpg`;
+        if (window.navigator.msSaveOrOpenBlob) {
+            // For IE/Edge browsers
+            window.navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // For other browsers
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    } catch (error) {
+        console.error('Error downloading image:', error);
+    }
+}
